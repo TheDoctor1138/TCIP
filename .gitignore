@@ -23,7 +23,7 @@ asm
 config
 logs
 options.txt
-libs
+build/libs
 saves
 usernamecache.json
 crash-report
@@ -31,7 +31,6 @@ crash-reports
 
 # other
 run
-lib
 *.iws___jb_tmp___
 *.directory
 classes
