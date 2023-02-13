@@ -20,6 +20,7 @@ public enum BlockIDs {
 
     support(false, null),
     supportGag(false, null),
+    platformStraight(false, null),
 
     /**Functional Blocks*/
 

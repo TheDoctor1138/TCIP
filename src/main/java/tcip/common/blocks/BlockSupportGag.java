@@ -71,7 +71,7 @@ public class BlockSupportGag extends Block {
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
         return null;
     }
-
+/*
     @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, Block par5) {
         TileEntity tileEntity = world.getTileEntity(i, j, k);
@@ -88,18 +88,18 @@ public class BlockSupportGag extends Block {
             }
         }
     }
-
+*/
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
-    @Override
+    /*@Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) {
         TileSupportGag tileEntity = (TileSupportGag) par1IBlockAccess.getTileEntity(i, j, k);
         if (tileEntity != null) {
             //System.out.println(tileEntity.type+" "+tileEntity.bbHeight);
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, tileEntity.bbHeight, 1.0F);
         }
-    }
+    }*/
 
     @Override
     public boolean hasTileEntity(int metadata) {
@@ -134,8 +134,9 @@ public class BlockSupportGag extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        texture = iconRegister.registerIcon(Info.modID.toLowerCase() + ":tracks/rail_normal_turned");
+        texture = iconRegister.registerIcon(Info.modID.toLowerCase() + ":rail_normal_turned");
     }
+
 
     @Override
     public IIcon getIcon(int i, int j) {

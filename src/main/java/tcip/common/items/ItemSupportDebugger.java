@@ -46,6 +46,9 @@ public class ItemSupportDebugger extends Item {
                 player.addChatMessage(new ChatComponentText(EnumChatFormatting.BOLD.GOLD + "Meta: " +  EnumChatFormatting.WHITE + tile.getBlockMetadata()));
                 player.addChatMessage(new ChatComponentText(EnumChatFormatting.BOLD.GOLD + "LinkedX: "    +  EnumChatFormatting.WHITE +  tile.linkedX + EnumChatFormatting.GOLD +  " LinkedY: " +  EnumChatFormatting.WHITE +tile.linkedY +  EnumChatFormatting.GOLD + " LinkedZ: "+  EnumChatFormatting.WHITE + tile.linkedZ));
                 player.addChatMessage(new ChatComponentText(EnumChatFormatting.BOLD.GOLD + "Ballast: "    +  EnumChatFormatting.WHITE +  Block.getBlockById(tile.getBallast()[0]).getLocalizedName() + EnumChatFormatting.GOLD +  " DamageValue: " +  EnumChatFormatting.WHITE +tile.getBallast()[1] +  EnumChatFormatting.GOLD + " Colour: "+  EnumChatFormatting.WHITE + tile.getBallast()[2]));
+                player.addChatMessage(new ChatComponentText(EnumChatFormatting.BOLD.GOLD + "minX: " + EnumChatFormatting.WHITE + tile.getBlockBounds()[0] + EnumChatFormatting.BOLD.GOLD + "minY: " + EnumChatFormatting.WHITE + tile.getBlockBounds()[1] + EnumChatFormatting.BOLD.GOLD + "minZ: " + EnumChatFormatting.WHITE + tile.getBlockBounds()[2] + EnumChatFormatting.BOLD.GOLD + "maxX: " + EnumChatFormatting.WHITE + tile.getBlockBounds()[3] + EnumChatFormatting.BOLD.GOLD + "maxY: " + EnumChatFormatting.WHITE + tile.getBlockBounds()[4] + EnumChatFormatting.BOLD.GOLD + "maxZ: " + EnumChatFormatting.WHITE + tile.getBlockBounds()[5] )  );
+
+
                 player.addChatMessage(new ChatComponentText(" "));
             }
             else  if (block == BlockIDs.supportGag.block){
