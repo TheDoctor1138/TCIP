@@ -1,5 +1,10 @@
 
 <!--Blocks-->
 tile.tcip:asphalt.name=Asphalt Block
+<!--Slabs==>
 tile.tcip:asphaltSlab.name=Asphalt Slab
+tile.tcip:ballastSlab.name=Ballast Slab
+<!--Stairs==>
 tile.tcip:asphaltStairs.name=Asphalt Stairs
+tile.tcip:ballastStairs.name=Ballast Stairs
+

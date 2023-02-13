@@ -4,14 +4,16 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
+import tcip.common.tile.TileSupport;
+import tcip.common.tile.TileSupportGag;
 
 
 public class CommonProxy implements IGuiHandler {
@@ -34,6 +36,11 @@ public class CommonProxy implements IGuiHandler {
 		MinecraftForge.EVENT_BUS.register(o);
 	}
 
+	public void registerTileEntities(){
+		GameRegistry.registerTileEntity(TileSupport.class, "TileSupport");
+		GameRegistry.registerTileEntity(TileSupportGag.class, "TileSupportGag");
+
+	}
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -52,37 +59,15 @@ public class CommonProxy implements IGuiHandler {
 		return null;
 	}
 
-	public int addArmor(String armor) {
-		return 0;
-	}
 
 	public Minecraft getClientInstance() {
 		return FMLClientHandler.instance().getClient();
 	}
 
-	public GuiScreen getCurrentScreen() {
-		return null;
-	}
-
-	public void registerTextureFX() {}
-
-	public void registerSounds() {}
-
-	public void registerBookHandler() {}
-
 	public Minecraft getMinecraft() {
 		return null;
 	}
 
-	public void registerVillagerSkin(int villagerId, String textureName) {}
-
-
-
-	public void openadmingui(String data){}
-
-	public static boolean checkJukeboxEntity(World world, int id) {
-		return  world.getEntityByID(id)!=null;
-	}
 
 	public void doNEICheck(ItemStack stack) {}
 
@@ -90,12 +75,5 @@ public class CommonProxy implements IGuiHandler {
 		return null;
 	}
 
-	public float getJukeboxVolume() {
-		return 0;
-	}
-
-	public void registerKeyBindingHandler() {}
-
 	public void setHook() {}
-	
 }

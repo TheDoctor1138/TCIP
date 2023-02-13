@@ -13,7 +13,7 @@ public class TCIPItems {
 
     private static void loadItems() {
 
-        ItemIDs.trackDebugger.item = new ItemTrackDebugger();
+        ItemIDs.trackDebugger.item = new ItemSupportDebugger();
     }
 
     private static void registerItems() {

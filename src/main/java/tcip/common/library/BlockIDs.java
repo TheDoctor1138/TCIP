@@ -2,15 +2,31 @@ package tcip.common.library;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
-import tcip.common.items.ItemAsphaltSlab;
+import tcip.common.items.slabs.*;
 
 public enum BlockIDs {
 
+    /**Normal Blocks*/
     asphalt(false, null),
+    /**Slabs*/
     asphaltSlab(true, ItemAsphaltSlab.class),
     asphaltDoubleSlab(true, ItemAsphaltSlab.class),
+    ballastSlab(true, ItemBallastSlab.class),
+    ballastDoubleSlab(true, ItemBallastSlab.class),
+    /**Stairs*/
     asphaltStairs(false, null),
+    ballastStairs(false, null),
+    /**Model Blocks*/
 
+    support(false, null),
+    supportGag(false, null),
+
+    /**Functional Blocks*/
+
+
+
+
+    /**TCCE Dependant Blocks*/
     ;
 
     public Block block;
