@@ -85,8 +85,8 @@ public class ItemPlatform extends Item {
         if (!world.isRemote) {
 
             y = getPlacementHeight(world, x, y, z);
-            int l = MathHelper.floor_double((player!=null?player.rotationYaw:par10) * 4.0F / 360.0F) & 7;
-
+            int l = MathHelper.floor_double((player.rotationYaw * 8f) / 360.0F + 0.5D ) & 7;
+            player.addChatMessage(new ChatComponentText("l: " + l));
             if (type == PlatformTypes.STRAIGHT){
 
                 if (!straightPlatform(player, world, x, y, z, l, type))
@@ -112,13 +112,15 @@ public class ItemPlatform extends Item {
         if (!canPlaceBlock(player, world, x, y + 1, z)) {
             return false;
         }
-        player.addChatMessage(new ChatComponentText("yes"));
         placeBlock(world, x, y + 1, z, BlockIDs.support.block, l);
         TileSupport support = (TileSupport) world.getTileEntity(x, y + 1, z);
         support.setType(type.getLabel());
         support.idDrop = this.type.getItem().item;
-        support.setBlockBounds(0.25f,0.0f,0.25f,0.75f,1.0f,0.75f);
+        support.setBlockBounds(0f,-1.0f,0f,1f,0.5f,1f);
         support.hasCustomBlockBounds = true;
+        support.setFacing(l);
+        Block block = world.getBlock(x, y, z);
+        support.setBallast(block.getIdFromBlock(block), world.getBlockMetadata(x, y, z), block.colorMultiplier(world, x, y, z) );
         return true;
     }
 

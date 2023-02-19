@@ -1,5 +1,6 @@
 package tcip.common.items;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import tcip.common.TCIP;
 import tcip.common.library.Info;
@@ -14,8 +15,15 @@ public class TCIPItems {
 
     private static void loadItems() {
 
-        ItemIDs.trackDebugger.item = new ItemSupportDebugger();
+        ItemIDs.trackDebugger.item = new ItemDebugger();
         ItemIDs.PlatformStraight.item = new ItemPlatform(ItemPlatform.PlatformTypes.STRAIGHT);
+
+
+        if (Loader.isModLoaded("tc")){
+            ItemIDs.itemSpanishSignal.item = new ItemSignal(ItemSignal.Signals.SPANISH_SIGNAL);
+        }
+
+
     }
 
     private static void registerItems() {

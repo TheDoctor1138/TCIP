@@ -3,8 +3,9 @@ package tcip.common.library;
 import net.minecraft.item.Item;
 
 public enum ItemIDs{
-    trackDebugger("ItemTrackDebugger", "placeholder"),
-    PlatformStraight("ItemPlatform", "item_platform_straight")
+    trackDebugger("ItemDebugger", "item_debugger"),
+    PlatformStraight("ItemPlatform", "item_platform_straight"),
+    itemSpanishSignal("ItemSignal", "item_signal_spanish")
     ;
 
 

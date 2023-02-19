@@ -1,22 +1,27 @@
 package tcip.common.blocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import tcip.common.TCIP;
 import tcip.common.tile.TileSupport;
+import train.common.library.Info;
 
 import java.util.Random;
 
 public class BlockSupport extends Block {
-
+    private IIcon texture;
     protected BlockSupport() {
         super(Material.iron);
         setCreativeTab(null);
@@ -129,6 +134,18 @@ public class BlockSupport extends Block {
             this.setBlockBounds((float) tileEntity.getBlockBounds()[0], (float)tileEntity.getBlockBounds()[1],(float)tileEntity.getBlockBounds()[2],(float)tileEntity.getBlockBounds()[3],(float)tileEntity.getBlockBounds()[4],(float)tileEntity.getBlockBounds()[5]);
         }
     }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        texture = iconRegister.registerIcon(Info.modID.toLowerCase() + ":asphalt");
+    }
+
+    @Override
+    public IIcon getIcon(int i, int j) {
+        return texture;
+    }
+
 
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k) {

@@ -12,4 +12,8 @@ public class Info {
     public static final String keyChannel = "TCIPKey";
     public static final String rotationChannel = "TCIPRotation";
 
+
+    public static final String resourceLocation = "tcip";
+    public static final String modelPrefix = "tcip:models/";
+    public static final String modelTexPrefix = "textures/models/";
 }

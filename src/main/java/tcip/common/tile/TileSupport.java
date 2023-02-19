@@ -114,6 +114,20 @@ public class TileSupport extends TileEntity {
         return bb;
     }
 
+    private ItemPlatform.PlatformTypes renderType = null;
+    public ItemPlatform.PlatformTypes getPlatformType(){
+        if (renderType == null){
+            if(hasModel && getType() != null){
+                for(ItemPlatform.PlatformTypes platform : ItemPlatform.PlatformTypes.values()){
+                    if (platform.getLabel().equals(getType())){
+                        renderType = platform;
+                    }
+                }
+            }
+        }
+        return renderType;
+    }
+
 
 
 

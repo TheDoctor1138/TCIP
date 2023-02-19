@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
+import tcip.common.tile.TileSignal;
 import tcip.common.tile.TileSupport;
 import tcip.common.tile.TileSupportGag;
 
@@ -39,6 +40,7 @@ public class CommonProxy implements IGuiHandler {
 	public void registerTileEntities(){
 		GameRegistry.registerTileEntity(TileSupport.class, "TileSupport");
 		GameRegistry.registerTileEntity(TileSupportGag.class, "TileSupportGag");
+		GameRegistry.registerTileEntity(TileSignal.class, "TileSignal");
 
 	}
 

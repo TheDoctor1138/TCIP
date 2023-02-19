@@ -10,9 +10,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.Level;
 import tcip.client.core.handlers.ClientTickHandler;
-import tcip.client.render.blocks.RenderSupport;
+import tcip.client.render.blocks.RenderPlatform;
+import tcip.client.render.blocks.RenderSignal;
 import tcip.common.TCIP;
 import tcip.common.core.CommonProxy;
+import tcip.common.tile.TileSignal;
 import tcip.common.tile.TileSupport;
 
 import java.lang.reflect.InvocationTargetException;
@@ -45,7 +47,8 @@ public class ClientProxy extends CommonProxy {
         // MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BLOCK.block), new ItemRenderBLOCK());
 
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileSupport.class, new RenderSupport());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileSupport.class, new RenderPlatform());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileSignal.class, new RenderSignal());
 
     }
 

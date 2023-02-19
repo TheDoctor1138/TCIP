@@ -24,6 +24,7 @@ public enum BlockIDs {
 
     /**Functional Blocks*/
 
+    signal(true, null),
 
 
 
