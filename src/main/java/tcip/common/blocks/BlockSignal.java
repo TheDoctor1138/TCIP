@@ -14,8 +14,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import tcip.common.TCIP;
+import tcip.common.library.Info;
 import tcip.common.tile.TileSignal;
-import train.common.library.Info;
 
 import java.util.Random;
 
@@ -97,6 +97,8 @@ public class BlockSignal extends Block {
 
 
 
+
+
     @Override
     public IIcon getIcon(int i, int j) {
         return texture;
@@ -116,7 +118,7 @@ public class BlockSignal extends Block {
     @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, Block par5) {
         TileEntity tile = world.getTileEntity(i, j, k);
-        if (tile == null || !(tile instanceof TileSignal))
+        if (!(tile instanceof TileSignal))
             return;
         TileSignal tileEntity = (TileSignal) world.getTileEntity(i, j, k);
         if (tileEntity != null && !world.isRemote) {

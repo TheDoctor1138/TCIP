@@ -10,7 +10,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import tcip.common.TCIP;
 import tcip.common.items.ItemSignal;
 import train.common.api.EntityRollingStock;
 import train.common.library.BlockIDs;
@@ -28,11 +27,9 @@ public class TileSignal extends TileEntity {
     public int linkedSignal2Y;
     public int linkedSignal2Z;
     public int signalValue;
-    private int linkedSignalValue;
     public boolean hasRollingStock;
-    public TileSignal signalLinked1;
-    public TileSignal signalLinked2;
     public boolean isLinked = false;
+    public boolean isLinked2 = false;
     public boolean isLinking = false;
     public boolean hasModel = true;
     public boolean isGettingPowered;
@@ -86,7 +83,7 @@ public class TileSignal extends TileEntity {
         Block type = getBlockType();
         if (type == BlockIDs.signal.block )
         {
-            bb = AxisAlignedBB.getBoundingBox(xCoord - 18, yCoord, zCoord - 18, xCoord + 18, yCoord , zCoord + 18);
+            bb = AxisAlignedBB.getBoundingBox(xCoord - 18, yCoord, zCoord - 18, xCoord + 18, yCoord + 4 , zCoord + 18);
         }
 
         return bb;
@@ -114,6 +111,7 @@ public class TileSignal extends TileEntity {
             return;
         }
         TileEntity linkedSignal;
+        TileEntity linkedSignal2;
         List list = null;
 
         switch (worldObj.getBlockMetadata(xCoord, yCoord, zCoord)) {
@@ -143,6 +141,9 @@ public class TileSignal extends TileEntity {
                     this.hasRollingStock = false;
                     this.setSignalValue(1);
                     linkedSignal = worldObj.getTileEntity(linkedSignal1X, linkedSignal1Y, linkedSignal1Z);
+                    linkedSignal2 = worldObj.getTileEntity(linkedSignal2X, linkedSignal2Y, linkedSignal2Z);
+
+
                     if (linkedSignal instanceof TileSignal){
                         ((TileSignal) linkedSignal).hasRollingStock = true;
                     }
@@ -162,7 +163,6 @@ public class TileSignal extends TileEntity {
 
         if (updateTicks % 20 == 0) {
             updateTicks = 0;
-            TCIP.tcipLog.info(isGettingPowered);
             linkedSignal = worldObj.getTileEntity(linkedSignal1X, linkedSignal1Y, linkedSignal1Z);
             if (linkedSignal instanceof TileSignal) {
 
@@ -180,7 +180,6 @@ public class TileSignal extends TileEntity {
                             break;
                         }
                         setSignalValue(0);
-                        TCIP.tcipLog.info("signal is green");
                         break;
                     }
                     case 1: {
@@ -190,7 +189,6 @@ public class TileSignal extends TileEntity {
                             break;
                         }
                         setSignalValue(2);
-                        TCIP.tcipLog.info("signal is red");
                         break;
 
                     }
@@ -199,7 +197,6 @@ public class TileSignal extends TileEntity {
                             setSignalValue(1);
                             break;
                         }
-                        TCIP.tcipLog.info("signal is green");
                         setSignalValue(0);
                         break;
                     }
@@ -209,7 +206,7 @@ public class TileSignal extends TileEntity {
         }
 
 
-        if (updateTick2 % 120 == 0) {
+        if (updateTick2 % 12000 == 0) {
             updateTick2 = 0;
 
             hasRollingStock = false;
@@ -226,8 +223,7 @@ public class TileSignal extends TileEntity {
 
         TileEntity tileLinkedSignal = worldObj.getTileEntity(linkedX, linkedY, linkedZ);
         if (tileLinkedSignal != null && tileLinkedSignal instanceof TileSignal ){
-           linkedSignalValue = ((TileSignal) tileLinkedSignal).getSignalValue();
-           TCIP.tcipLog.info("FOUND TILESIGNAL, value is: " + linkedSignalValue );
+            int linkedSignalValue = ((TileSignal) tileLinkedSignal).getSignalValue();
            return linkedSignalValue;
         }
         return -1;
@@ -259,6 +255,7 @@ public class TileSignal extends TileEntity {
         idDrop = Item.getItemById(nbt.getInteger("IdDrop"));
         hasRollingStock = nbt.getBoolean("hasRollingStock");
         isLinked = nbt.getBoolean("isLinked");
+        isLinked2 = nbt.getBoolean("isLinked2");
 
     }
 
@@ -274,6 +271,8 @@ public class TileSignal extends TileEntity {
         nbt.setInteger("lS2X", linkedSignal2X);
         nbt.setInteger("lS2Y", linkedSignal2Y);
         nbt.setInteger("lS2Z", linkedSignal2Z);
+        nbt.setBoolean("isLinked", isLinked);
+        nbt.setBoolean("isLinked2", isLinked2);
 
         nbt.setInteger("signalValue", signalValue);
         nbt.setBoolean("hasModel", hasModel);

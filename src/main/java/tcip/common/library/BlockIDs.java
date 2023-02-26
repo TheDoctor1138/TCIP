@@ -24,11 +24,13 @@ public enum BlockIDs {
 
     /**Functional Blocks*/
 
-    signal(true, null),
+
 
 
 
     /**TCCE Dependant Blocks*/
+
+    signal(false, null),
     ;
 
     public Block block;

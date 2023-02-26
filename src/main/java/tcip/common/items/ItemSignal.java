@@ -87,12 +87,7 @@ public class ItemSignal extends Item {
         signal.setType(signalType.getLabel());
         signal.hasModel = true;
         signal.idDrop = this.signalType.getItem().item;
-        signal.linkedSignal1X = x;
-        signal.linkedSignal1Y = y + 1;
-        signal.linkedSignal1Z = z - 2;
-        signal.linkedSignal2X = x;
-        signal.linkedSignal2Y = y + 1;
-        signal.linkedSignal2Z = z - 4;
+
 
 
         player.addChatMessage(new ChatComponentText ("x:" + signal.linkedSignal1X + " y: " + signal.linkedSignal1Y + " z: " + signal.linkedSignal1Z ));

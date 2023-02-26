@@ -26,7 +26,9 @@ public class ItemDebugger extends Item {
         setCreativeTab(null);
     }
 
-    private boolean isAttaching = false;
+    TileSignal tileSignal = null;
+    TileSignal tileSignal1 = null;
+    TileSignal tileTemp = null;
 
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10) {
@@ -65,61 +67,148 @@ public class ItemDebugger extends Item {
 
                 }
             } else if (Loader.isModLoaded("tc") && block == BlockIDs.signal.block) {
-                TileSignal tile1 = (TileSignal) world.getTileEntity(x, y, z);
-                TileSignal tileTemp = null;
-                if (tile1 != null) {
-                    if (!tile1.isLinking) {
-                        player.addChatMessage(new ChatComponentText("Attachment mode on for: " + tile1.getSignalType().getLabel() + "."));
-                        tileTemp = tile1;
-                        player.addChatMessage(new ChatComponentText("temp: " + tileTemp.getSignalValue()));
-                        tile1.isLinking = true;
-                    }
 
-                    if (!tile1.isLinking && tile1 != tileTemp){
 
-                    }
-                    else {
-                        player.addChatMessage(new ChatComponentText("Attachment reset."));
-                        tile1.isLinking = false;
-                        tileTemp = null;
-                    }
 
-                    /*else if (world.getTileEntity(x, y, z) != tileTemp) {
-                        TileSignal tile2 = (TileSignal) world.getTileEntity(x, y, z);
-                        if (!tile2.isLinking) {
-                            player.addChatMessage(new ChatComponentText("test"));
-                        }
-                    }
-                    */
+
+
+
+                tileTemp = (TileSignal) world.getTileEntity(x, y, z);
+
+                if (player.isSneaking()){
+                    tileTemp.isLinked = false;
+                    tileTemp.isLinked2 = false;
+                    tileTemp.isLinking = false;
+                    tileSignal = null;
+                    player.addChatMessage(new ChatComponentText("Can now be reattached to other signals!"));
+                    return true;
+
 
                 }
 
-            }
 
 
+                if (!tileTemp.isLinking && tileSignal == null) {
 
+                    tileTemp.isLinking = true;
+                    tileSignal = tileTemp;
+                    player.addChatMessage(new ChatComponentText("Attachment mode on for: " + tileSignal.getSignalType().getLabel() + "."));
+                    return true;
+                }
+                else if (!tileTemp.isLinking) {
 
-                /*TileSignal tile = (TileSignal) world.getTileEntity(x, y, z);
-                if (tile != null) {
-
-                    tile.setSignalValue(tile.getSignalValue() + 1);
-                    if (tile.getSignalValue() > 2 ){
-                        tile.setSignalValue(0);
+                    if (!tileSignal.isLinked){
+                        tileSignal.linkedSignal1X = tileTemp.xCoord;
+                        tileSignal.linkedSignal1Y = tileTemp.yCoord;
+                        tileSignal.linkedSignal1Z = tileTemp.zCoord;
+                        tileSignal.isLinked = true;
+                        tileSignal.isLinking = false;
+                        tileSignal = null;
+                        player.addChatMessage(new ChatComponentText("First signal attached!"));
                     }
-                    tile.markDirty();
-                    tile.getWorldObj().markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
+                    else if (!tileSignal.isLinked2) {
+                        tileSignal.linkedSignal2X = tileTemp.xCoord;
+                        tileSignal.linkedSignal2Y = tileTemp.yCoord;
+                        tileSignal.linkedSignal2Z = tileTemp.zCoord;
+                        tileSignal.isLinked2 = true;
+                        tileSignal.isLinking = false;
+                        tileSignal = null;
+                        player.addChatMessage(new ChatComponentText("Second signal attached!"));
+
+                    }
+
+                    else {
+                        tileSignal.isLinking = false;
+                        tileSignal = null;
+                        player.addChatMessage(new ChatComponentText("Only two different signals can be connected to the first signal!"));
+                        return false;
+                    }
+
+
+                    return true;
+                }
+
+                else {
+                    tileTemp.isLinking = false;
+                    tileSignal = null;
+                    player.addChatMessage(new ChatComponentText("Reset, click again to turn on attachment mode!"));
+                    return false;
+                }
+
+
+                /*
+                if (player.isSneaking()) {
+                    tileTemp.isLinked = false;
+                    player.addChatMessage(new ChatComponentText("can now be relinked"));
+                    return true;
+                }
+                if (!tileTemp.isLinked) {
+
+                    if (!tileTemp.isLinking && tileSignal == null) {
+                        tileTemp.isLinking = true;
+                        tileSignal = tileTemp;
+                        player.addChatMessage(new ChatComponentText("Attachment mode on for: " + tileSignal.getSignalType().getLabel() + "."));
+                        return true;
+                    } else if (!tileTemp.isLinking) {
+                        tileTemp.isLinking = true;
+                        tileSignal1 = tileTemp;
+                        player.addChatMessage(new ChatComponentText("Attachment mode on for second signal: " + tileSignal1.getSignalType().getLabel() + "."));
+
+                        tileSignal.linkedSignal1X = tileSignal1.xCoord;
+                        tileSignal.linkedSignal1Y = tileSignal1.yCoord;
+                        tileSignal.linkedSignal1Z = tileSignal1.zCoord;
+                        tileSignal1.isLinked = true;
+                        tileSignal.isLinking = false;
+                        tileSignal1.isLinking = false;
+                        player.addChatMessage(new ChatComponentText("Attached"));
+                        tileSignal = null;
+                        tileSignal1 = null;
+                        return true;
+                    } else if (tileSignal != null || tileSignal1 != null) {
+                        player.addChatMessage(new ChatComponentText("Attachment reset."));
+                        tileTemp.isLinking = false;
+                        tileSignal = null;
+                        tileSignal1 = null;
+                        return false;
+                    }
+
+                }
+                else {
+                    if (!tileTemp.isLinking && tileSignal == null) {
+                        tileTemp.isLinking = true;
+                        tileSignal = tileTemp;
+                        player.addChatMessage(new ChatComponentText("Attachment mode on for: " + tileSignal.getSignalType().getLabel() + "."));
+                        return true;
+                    } else if (!tileTemp.isLinking) {
+                        tileTemp.isLinking = true;
+                        tileSignal1 = tileTemp;
+                        player.addChatMessage(new ChatComponentText("Attachment mode on for second signal: " + tileSignal1.getSignalType().getLabel() + "."));
+                        tileSignal.linkedSignal2X = tileSignal1.xCoord;
+                        tileSignal.linkedSignal2Y = tileSignal1.yCoord;
+                        tileSignal.linkedSignal2Z = tileSignal1.zCoord;
+                        tileSignal1.isLinked2 = true;
+                        player.addChatMessage(new ChatComponentText("Attached"));
+                        tileSignal = null;
+                        tileSignal1 = null;
+                        return true;
+
+                    } else if (tileSignal != null || tileSignal1 != null) {
+                        player.addChatMessage(new ChatComponentText("Attachment reset."));
+                        tileTemp.isLinking = false;
+                        tileSignal = null;
+                        tileSignal1 = null;
+                        return false;
+                    }
+
+
                 }*/
-
-
-            else {
+            } else {
                 player.addChatMessage(new ChatComponentText("Not a TCIP: SupportBlock"));
                 return false;
             }
 
 
         }
-
-
 
         return super.onItemUse(itemstack, player, world, x, y, z, par7, par8, par9, par10);
     }

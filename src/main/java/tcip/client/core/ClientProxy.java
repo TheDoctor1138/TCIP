@@ -50,6 +50,8 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileSupport.class, new RenderPlatform());
         ClientRegistry.bindTileEntitySpecialRenderer(TileSignal.class, new RenderSignal());
 
+
+
     }
 
     @Override

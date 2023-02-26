@@ -50,24 +50,25 @@ public class RenderSignal extends TileEntitySpecialRenderer {
             }
             case 1: {
                 GL11.glRotated(0, 0, 1, 0);
+                GL11.glRotated(-45, 0, 1, 0);
                 modelSpanishSignal.render(null, 0,0,0,0,0,1.0f);
                 break;
             }
             case 3: {
                 GL11.glRotated(0, 0, 0, 1);
-                GL11.glRotated(90, 0, 1, 0);
+                GL11.glRotated(45, 0, 1, 0);
                 modelSpanishSignal.render(null, 0,0,0,0,0,1.0f);
                 break;
             }
             case 5: {
                 GL11.glRotated(0, 0, 0, 1);
-                GL11.glRotated(180, 0, 1, 0);
+                GL11.glRotated(135, 0, 1, 0);
                 modelSpanishSignal.render(null, 0,0,0,0,0,1.0f);
                 break;
             }
             case 7: {
                 GL11.glRotated(0, 0, 0, 1);
-                GL11.glRotated(270, 0, 1, 0);
+                GL11.glRotated(-135, 0, 1, 0);
                 modelSpanishSignal.render(null, 0,0,0,0,0,1.0f);
                 break;
             }
